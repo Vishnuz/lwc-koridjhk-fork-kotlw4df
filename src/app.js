@@ -101,7 +101,7 @@ export default class App extends LightningElement {
         this.mode = 'edit';
     }
 
-    handleAccSelectionDone(ev) {
+    handleDone(ev) {
         if(this.selectedItems.length === 0) {
             alert('Select at least one account');
             return;
@@ -109,11 +109,20 @@ export default class App extends LightningElement {
         this.comboCss = 'slds-dropdown slds-dropdown_length-with-icon-10 slds-dropdown_fluid inactive';
         this.mode = 'read';
     }
+    handleCancel(ev) {
+        this.selectedItems = this.selectedItemsOld;
+        this.comboCss = 'slds-dropdown slds-dropdown_length-with-icon-10 slds-dropdown_fluid inactive';
+        this.mode = 'read';
+        this.allAccountsSelected = this.options.length === this.selectedItems.length;
+        this.updateSelectedItemsInUI();
+    }
 
+    selectedItemsOld;
     handleEdit(ev) {
         this.comboCss = 'slds-dropdown slds-dropdown_length-with-icon-10 slds-dropdown_fluid active';
         this.mode = 'edit';
         this.searchStr = '';
+        this.selectedItemsOld = [...this.selectedItems];
     }
 
     allAccountsSelected = false;
@@ -134,17 +143,13 @@ export default class App extends LightningElement {
     } 
 
     connectedCallback(ev) {
-        
+       this.updateSelectedItemsInUI();
+    }
+
+    updateSelectedItemsInUI() {
         this.template.querySelectorAll('c-child').forEach(ch => {
             ch.checked = this.selectedItems.find(sl => sl.value === ch.uniqueId);
-            console.log('ch.checked' , ch.checked);
-            console.log('ch.uniqueId' , ch.uniqueId);
-            console.log('this.selectedItems' , this.selectedItems);
-            console.log('this.selectedItems' , JSON.stringify(this.selectedItems));
         });
-    }
-    renderedCallback() {
-        console.log('rendered');
     }
 
 
@@ -275,6 +280,21 @@ export default class App extends LightningElement {
         }
 
         return label;
+    }
+
+    handleSelectAllLabelClick(ev) {
+        this.allAccountsSelected = !this.allAccountsSelected;
+        this.selectedItems = [];
+        if(this.allAccountsSelected) {
+            this.template.querySelectorAll('c-child').forEach(ch => {
+                ch.checked = true;
+                this.selectedItems.push({label: ch.text, value: ch.uniqueId });
+            });
+        } else {
+            this.template.querySelectorAll('c-child').forEach(ch => {
+                ch.checked = false;
+            });
+        }
     }
 
 }

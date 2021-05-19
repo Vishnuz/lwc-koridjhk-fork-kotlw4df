@@ -1,20 +1,18 @@
 <template>
 	<div style="display:flex">
-		<div style="width: auto" id="option1"
+		<div style="width: auto; flex: 1;" id="option1"
 			class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
 
 			<span class="slds-media__body slds-m-horizontal_x-small">
 				<div style="display:flex">		
-					<div>          		
+					<div style="transform: scale(.8);">          		
 						<lightning-input checked={checked} type="checkbox-button" label="Input One" name="input1" onchange={handleCbChange}></lightning-input>
 					</div>	 
-					<div class="slds-m-left_small" onmousedown={handleSelect}>           		
+					<div class="slds-m-left_small" style="flex:1"  onmousedown={handleSelect}>           		
 						<span class="slds-listbox__option-text slds-listbox__option-text_entity">{text}</span>
 			<span if:true={metaText} class="slds-listbox__option-meta slds-listbox__option-meta_entity">{metaText}</span>
 		</div>
 	</div>
-
-
 	</span>
 	</div>
 	</div>

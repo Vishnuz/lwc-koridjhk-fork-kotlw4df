@@ -23,10 +23,30 @@
     padding: 0;
     margin: 0;
     border: 0;
-    transition: all 0.5s;
+    transition: all 0.3s linear;
 }
 
 .active {
     height:100%;
-  transition: all 0.5s;
+  transition: all 0.3s linear;
+}
+
+.allaccounts:hover {
+    background-color: #c6dbf5;
+    cursor: pointer;
+}
+
+.allaccounts {
+    display: flex;
+    padding-top: 6px;
+    padding-bottom: 2px;
+    padding-left: 20px;
+}
+
+.allaccountslabel {
+    flex: 1 1 0%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }

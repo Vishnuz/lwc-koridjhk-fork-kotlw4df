@@ -36,16 +36,16 @@
 																			size="x-small" variant="base"></lightning-icon>
 													</button>
 							</div>
-							<div c-combobox_combobox="" class="slds-p-bottom_x-small"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</template>
 
-		<div id="listbox-id-11" class={comboCss} role="listbox" style="overflow-y: hidden; width: calc(100% - 30px);">
+		<div id="listbox-id-11" class={comboCss} role="listbox"
+			style="overflow-y: hidden;width: calc(100% - 30px);max-height: 25rem;">
 			<div class="slds-p-left_medium"
-				style="display: flex;align-items: center; min-height:28px; max-height:50px; overflow-y: auto;">
+				style="display: flex;align-items: center; min-height:28px; max-height:60px; overflow-y: auto;">
 				<div class="slds-p-right_x-small" style="white-space: nowrap;">Selected Accounts: </div>
 
 				<div if:false={allAccountsSelected} style="margin-top: auto;">
@@ -58,10 +58,17 @@
 					All Accounts ({selectedItems.length})
 				</div>
 			</div>
-			<ul class="slds-listbox slds-listbox_vertical" role="presentation" style="overflow-y: auto; max-height: 300px; ">
-				<div class="slds-p-left_medium slds-m-left_xx-small" style="display: flex;align-items: center;">
-					<lightning-input type="checkbox-button" label="Select all" value="All" onchange={handleSelectAllChange}
-						checked={allAccountsSelected}> </lightning-input>
+			<ul class="slds-listbox slds-listbox_vertical" role="presentation"
+				style="overflow-y: auto; max-height: 320px; padding-bottom: 30px;">
+				<div class="allaccounts">
+
+					<div style="transform: scale(.8);">
+						<lightning-input type="checkbox-button" label="Select all" value="All" onchange={handleSelectAllChange}
+							checked={allAccountsSelected}> </lightning-input>
+					</div>
+					<div class="slds-m-left_small allaccountslabel" onmousedown={handleSelectAllLabelClick}>
+						<span class="slds-listbox__option-text slds-listbox__option-text_entity">All Accounts</span>
+					</div>
 				</div>
 				<template for:each={processedListData} for:item="datum">
 					<li key={datum.key} role="presentation" class={datum.cssClass}>
@@ -77,11 +84,13 @@
 				</template>
 			</ul>
 			<div class="slds-listbox__item"
-				style="display: flex; justify-content: flex-end; padding-right: 20px; padding-top: 5px;">
+				style="display: flex;justify-content: flex-end;padding-right: 20px;padding-top: 5px;margin-bottom: 0;bottom: 0;position: absolute;right: 0;background-color: white;width: 100%;padding-bottom: 10px;">
 				<div
 					class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta slds-p-around_none">
-					<lightning-button variant="brand" label="Done" title="Done" onclick={handleAccSelectionDone}
+					<lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={handleCancel}
 						class="slds-m-left_x-small"></lightning-button>
+					<lightning-button variant="brand" label="Done" title="Done" onclick={handleDone} class="slds-m-left_x-small">
+					</lightning-button>
 				</div>
 			</div>
 		</div>
