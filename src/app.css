@@ -50,3 +50,12 @@
     align-content: center;
     flex-direction: column;
 }
+
+.pill {
+    margin-left: 3px;
+    color: #4e4747;
+    --sds-c-pill-radius-border: 1rem;
+}
+.pillicon {
+    --sds-c-icon-radius-border: 1rem;
+}

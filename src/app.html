@@ -50,8 +50,8 @@
 
 				<div if:false={allAccountsSelected} style="margin-top: auto;">
 					<lightning-pill for:each={selectedItems} for:item="selItem" label={selItem.label} data-key={selItem.value}
-						key={selItem.value} name={selItem.value} onremove={handleRemove}>
-						<lightning-icon icon-name="standard:account" variant="circle"></lightning-icon>
+						key={selItem.value} name={selItem.value} onremove={handleRemove} class='pill'>
+						<lightning-icon class="pillicon" icon-name="standard:account" variant="circle"></lightning-icon>
 					</lightning-pill>
 				</div>
 				<div if:true={allAccountsSelected}>
@@ -67,7 +67,7 @@
 							checked={allAccountsSelected}> </lightning-input>
 					</div>
 					<div class="slds-m-left_small allaccountslabel" onmousedown={handleSelectAllLabelClick}>
-						<span class="slds-listbox__option-text slds-listbox__option-text_entity">All Accounts</span>
+						<span class="slds-listbox__option-text slds-listbox__option-text_entity">All Accounts ({options.length})</span>
 					</div>
 				</div>
 				<template for:each={processedListData} for:item="datum">
