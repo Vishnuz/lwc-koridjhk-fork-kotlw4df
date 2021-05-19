@@ -1,0 +1,89 @@
+<template>
+	<div>
+		<div if:false={isReadMode} class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+			role="none">
+			<input type="text" class="slds-input slds-combobox__input" id="combobox-id-1" data-id="input"
+				aria-autocomplete="list" aria-controls="listbox-id-1" autocomplete="off" role="textbox"
+				placeholder={placeholder} onkeyup={handleInpChange} onfocus={handleInpFocus}
+			/>
+			<span
+				class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+				<lightning-icon icon-name="utility:search" alternative-text="Search" size="x-small">
+				</lightning-icon>
+		</span>
+		</div>
+
+		<template if:true={isReadMode}>
+			<div c-combobox_combobox="" class="slds-form-element">
+				<div c-combobox_combobox="" class="slds-form-element__control">
+					<div c-combobox_combobox="" id="form-combo-box-19" class="slds-combobox_container slds-has-selection">
+						<div c-combobox_combobox="" aria-expanded="false" aria-haspopup="listbox" role="combobox"
+							class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+							<div c-combobox_combobox=""
+								class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right">
+								<lightning-icon icon-name="standard:account" alternative-text="Account Selected" size="small"
+									class="slds-combobox__input-entity-icon"></lightning-icon>
+
+
+								<input type="text" class="slds-input slds-combobox__input slds-combobox__input-value"
+													aria-autocomplete="list" aria-controls="listbox-id-2" role="textbox"
+													readonly disabled={disabled} value={displayText} />
+
+
+								<button if:false={disabled} class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+																	title="Remove selected option" onclick={handleEdit}>
+															<lightning-icon icon-name="utility:edit" alternative-text="Remove selected option"
+																			size="x-small" variant="base"></lightning-icon>
+													</button>
+							</div>
+							<div c-combobox_combobox="" class="slds-p-bottom_x-small"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<div id="listbox-id-11" class={comboCss} role="listbox" style="overflow-y: hidden; width: calc(100% - 30px);">
+			<div class="slds-p-left_medium"
+				style="display: flex;align-items: center; min-height:28px; max-height:50px; overflow-y: auto;">
+				<div class="slds-p-right_x-small" style="white-space: nowrap;">Selected Accounts: </div>
+
+				<div if:false={allAccountsSelected} style="margin-top: auto;">
+					<lightning-pill for:each={selectedItems} for:item="selItem" label={selItem.label} data-key={selItem.value}
+						key={selItem.value} name={selItem.value} onremove={handleRemove}>
+						<lightning-icon icon-name="standard:account" variant="circle"></lightning-icon>
+					</lightning-pill>
+				</div>
+				<div if:true={allAccountsSelected}>
+					All Accounts ({selectedItems.length})
+				</div>
+			</div>
+			<ul class="slds-listbox slds-listbox_vertical" role="presentation" style="overflow-y: auto; max-height: 300px; ">
+				<div class="slds-p-left_medium slds-m-left_xx-small" style="display: flex;align-items: center;">
+					<lightning-input type="checkbox-button" label="Select all" value="All" onchange={handleSelectAllChange}
+						checked={allAccountsSelected}> </lightning-input>
+				</div>
+				<template for:each={processedListData} for:item="datum">
+					<li key={datum.key} role="presentation" class={datum.cssClass}>
+						<div id={datum.key}
+							class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta slds-p-around_none"
+							role="option">
+							<c-child icon-name={datum.iconName} alternative-text={datum.iconText} icon-size={datum.iconSize}
+								icon-variant={datum.iconVariant} text={datum.text} meta-text={datum.metaText} unique-id={datum.key}
+								onselect={handleSelect}>
+							</c-child>
+						</div>
+					</li>
+				</template>
+			</ul>
+			<div class="slds-listbox__item"
+				style="display: flex; justify-content: flex-end; padding-right: 20px; padding-top: 5px;">
+				<div
+					class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta slds-p-around_none">
+					<lightning-button variant="brand" label="Done" title="Done" onclick={handleAccSelectionDone}
+						class="slds-m-left_x-small"></lightning-button>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

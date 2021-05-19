@@ -1,0 +1,32 @@
+.error-msg {
+    background-color: rgb(234, 78, 78);
+    color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(234, 78, 78);
+    border-image: initial;
+    border-radius: 10px;
+}
+
+.item:hover {
+    background-color: rgb(234, 78, 78) !important;
+    color:whitesmoke;
+}
+
+.invalid-inp {
+    position: absolute; 
+}
+
+.inactive {
+    height: 0;
+    /* width: 0; */
+    padding: 0;
+    margin: 0;
+    border: 0;
+    transition: all 0.5s;
+}
+
+.active {
+    height:100%;
+  transition: all 0.5s;
+}
